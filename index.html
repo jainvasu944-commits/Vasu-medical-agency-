@@ -1,0 +1,200 @@
+<!DOCTYPE html><html>
+<head>
+<title>Vasu Medical Agency</title><style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f4f6fa;
+text-align:center;
+}
+
+header{
+background:#1565c0;
+color:white;
+padding:30px;
+}
+
+nav{
+background:#0d47a1;
+padding:10px;
+}
+
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+section{
+padding:50px;
+}
+
+.hero{
+background:linear-gradient(135deg,#1565c0,#42a5f5);
+color:white;
+padding:80px;
+}
+
+table{
+margin:auto;
+border-collapse:collapse;
+}
+
+td,th{
+border:1px solid #ccc;
+padding:10px;
+}
+
+button{
+padding:10px 20px;
+background:#1565c0;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#0d47a1;
+}
+
+input,textarea{
+padding:10px;
+margin:5px;
+width:250px;
+}
+
+.floating{
+position:fixed;
+font-size:40px;
+animation:float 6s infinite;
+}
+
+.floating:nth-child(1){
+top:20%;
+left:10%;
+}
+
+.floating:nth-child(2){
+top:60%;
+left:80%;
+}
+
+.floating:nth-child(3){
+top:40%;
+left:50%;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-20px);}
+100%{transform:translateY(0px);}
+}
+
+</style></head><body><header><h1>Vasu Medical Agency</h1><p>Trusted Pharmaceutical Distributor Since 2014</p></header><nav><a href="#home">Home</a>
+<a href="#history">History</a>
+<a href="#products">Products</a>
+<a href="#order">Order</a>
+<a href="#admin">Admin</a>
+<a href="#contact">Contact</a>
+
+</nav><section id="home" class="hero"><h2>Quality Medicines Distribution</h2><p>Serving pharmacies across Chhindwara</p><a href="catalog.pdf">
+<button>Download Product Catalog</button>
+</a></section><section id="history"><h2>Company History</h2><p>Vasu Medical Agency was founded by
+<b>Shailendra Jain</b> in <b>2014</b> in Chhindwara.
+
+The agency supplies medicines and healthcare products to
+pharmacies and medical stores across the district.
+
+</p></section><section id="products"><h2>Medicine Price List</h2><input id="search" placeholder="Search medicine" onkeyup="searchMedicine()"><table id="table"><tr>
+<th>Medicine</th>
+<th>Company</th>
+<th>Price</th>
+<th>Stock</th>
+</tr><tr>
+<td>Paracetamol 500mg</td>
+<td>Cipla</td>
+<td>₹45</td>
+<td>200</td>
+</tr><tr>
+<td>Azithromycin</td>
+<td>Sun Pharma</td>
+<td>₹120</td>
+<td>100</td>
+</tr><tr>
+<td>Vitamin C</td>
+<td>Mankind</td>
+<td>₹60</td>
+<td>150</td>
+</tr></table></section><section id="order"><h2>Order Medicines</h2><input placeholder="Pharmacy Name"><br>
+
+<input placeholder="Phone Number"><br>
+
+<textarea placeholder="Medicines Required"></textarea><br><button onclick="alert('Order Submitted')">Submit Order
+
+</button></section><section id="admin"><h2>Admin Login</h2><input type="password" id="pass" placeholder="Password"><button onclick="login()">Login</button>
+
+<div id="panel" style="display:none"><h3>Add Medicine</h3><input id="name" placeholder="Medicine Name"><input id="company" placeholder="Company"><input id="price" placeholder="Price"><input id="stock" placeholder="Stock"><button onclick="addMedicine()">Add Medicine
+
+</button><ul id="list"></ul></div></section><section id="contact"><h2>Location</h2><iframe
+src="https://www.google.com/maps?q=Chhindwara&output=embed"
+width="90%"
+height="300">
+</iframe></section><div class="floating">💊</div>
+<div class="floating">💉</div>
+<div class="floating">🩺</div><script>
+
+function searchMedicine(){
+
+let input=document.getElementById("search").value.toLowerCase();
+
+let rows=document.querySelectorAll("#table tr");
+
+rows.forEach(function(row){
+
+if(row.innerText.toLowerCase().includes(input))
+row.style.display="";
+else
+row.style.display="none";
+
+});
+
+}
+
+function login(){
+
+let pass=document.getElementById("pass").value;
+
+if(pass==="vasu123"){
+
+document.getElementById("panel").style.display="block";
+
+}else{
+
+alert("Wrong Password");
+
+}
+
+}
+
+function addMedicine(){
+
+let name=document.getElementById("name").value;
+
+let company=document.getElementById("company").value;
+
+let price=document.getElementById("price").value;
+
+let stock=document.getElementById("stock").value;
+
+let li=document.createElement("li");
+
+li.innerText=name+" - "+company+" - ₹"+price+" - Stock:"+stock;
+
+document.getElementById("list").appendChild(li);
+
+}
+
+</script></body>
+</html>
