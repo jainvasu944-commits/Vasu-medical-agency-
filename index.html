@@ -1,200 +1,413 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 <head>
-<title>Vasu Medical Agency</title><style>
+<title>Vasu Medical Agency</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+/* BODY */
 
 body{
-font-family:Arial;
 margin:0;
-background:#f4f6fa;
-text-align:center;
+font-family:Arial;
+background:linear-gradient(120deg,#e6f7ff,#ffffff);
+color:#333;
 }
 
-header{
-background:#1565c0;
-color:white;
-padding:30px;
+/* LOADING */
+
+#loader{
+position:fixed;
+width:100%;
+height:100%;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:bold;
+z-index:9999;
+color:#0b6db7;
 }
+
+/* NAVBAR */
 
 nav{
-background:#0d47a1;
-padding:10px;
+background:#0b6db7;
+padding:15px;
+text-align:center;
 }
 
 nav a{
 color:white;
-margin:15px;
-text-decoration:none;
+margin:12px;
+cursor:pointer;
 font-weight:bold;
+text-decoration:none;
 }
 
-section{
+/* PAGES */
+
+.page{
+display:none;
 padding:50px;
 }
 
-.hero{
-background:linear-gradient(135deg,#1565c0,#42a5f5);
-color:white;
-padding:80px;
+#home{
+display:block;
 }
+
+/* CARDS */
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:15px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+flex:1 1 250px;
+}
+
+/* TABLE */
 
 table{
-margin:auto;
+width:100%;
 border-collapse:collapse;
+background:white;
 }
 
-td,th{
-border:1px solid #ccc;
+th,td{
+border:1px solid #ddd;
 padding:10px;
 }
 
-button{
-padding:10px 20px;
-background:#1565c0;
+th{
+background:#0b6db7;
 color:white;
-border:none;
-cursor:pointer;
 }
 
-button:hover{
-background:#0d47a1;
+/* FOOTER */
+
+footer{
+background:#0b6db7;
+color:white;
+padding:40px;
 }
 
-input,textarea{
-padding:10px;
-margin:5px;
-width:250px;
-}
+/* PHARMA FLOATING BG */
 
-.floating{
+.bg{
 position:fixed;
-font-size:40px;
+width:200px;
+height:200px;
+background:#cceeff;
+border-radius:50%;
+opacity:0.4;
 animation:float 6s infinite;
 }
 
-.floating:nth-child(1){
-top:20%;
-left:10%;
-}
-
-.floating:nth-child(2){
-top:60%;
-left:80%;
-}
-
-.floating:nth-child(3){
-top:40%;
-left:50%;
-}
+.bg1{top:10%;left:10%;}
+.bg2{top:60%;left:80%;}
+.bg3{top:80%;left:30%;}
 
 @keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-20px);}
-100%{transform:translateY(0px);}
+0%{transform:translateY(0)}
+50%{transform:translateY(-20px)}
+100%{transform:translateY(0)}
 }
 
-</style></head><body><header><h1>Vasu Medical Agency</h1><p>Trusted Pharmaceutical Distributor Since 2014</p></header><nav><a href="#home">Home</a>
-<a href="#history">History</a>
-<a href="#products">Products</a>
-<a href="#order">Order</a>
-<a href="#admin">Admin</a>
-<a href="#contact">Contact</a>
+</style>
 
-</nav><section id="home" class="hero"><h2>Quality Medicines Distribution</h2><p>Serving pharmacies across Chhindwara</p><a href="catalog.pdf">
-<button>Download Product Catalog</button>
-</a></section><section id="history"><h2>Company History</h2><p>Vasu Medical Agency was founded by
-<b>Shailendra Jain</b> in <b>2014</b> in Chhindwara.
+<script>
 
-The agency supplies medicines and healthcare products to
-pharmacies and medical stores across the district.
+/* LOADING */
 
-</p></section><section id="products"><h2>Medicine Price List</h2><input id="search" placeholder="Search medicine" onkeyup="searchMedicine()"><table id="table"><tr>
-<th>Medicine</th>
-<th>Company</th>
-<th>Price</th>
-<th>Stock</th>
-</tr><tr>
-<td>Paracetamol 500mg</td>
-<td>Cipla</td>
-<td>₹45</td>
-<td>200</td>
-</tr><tr>
-<td>Azithromycin</td>
-<td>Sun Pharma</td>
-<td>₹120</td>
-<td>100</td>
-</tr><tr>
-<td>Vitamin C</td>
-<td>Mankind</td>
-<td>₹60</td>
-<td>150</td>
-</tr></table></section><section id="order"><h2>Order Medicines</h2><input placeholder="Pharmacy Name"><br>
+window.onload=function(){
+setTimeout(function(){
+document.getElementById("loader").style.display="none";
+},2000)
+}
 
-<input placeholder="Phone Number"><br>
+/* PAGE SWITCH */
 
-<textarea placeholder="Medicines Required"></textarea><br><button onclick="alert('Order Submitted')">Submit Order
+function showPage(id){
 
-</button></section><section id="admin"><h2>Admin Login</h2><input type="password" id="pass" placeholder="Password"><button onclick="login()">Login</button>
+var pages=document.querySelectorAll(".page")
 
-<div id="panel" style="display:none"><h3>Add Medicine</h3><input id="name" placeholder="Medicine Name"><input id="company" placeholder="Company"><input id="price" placeholder="Price"><input id="stock" placeholder="Stock"><button onclick="addMedicine()">Add Medicine
+pages.forEach(p=>p.style.display="none")
 
-</button><ul id="list"></ul></div></section><section id="contact"><h2>Location</h2><iframe
-src="https://www.google.com/maps?q=Chhindwara&output=embed"
-width="90%"
-height="300">
-</iframe></section><div class="floating">💊</div>
-<div class="floating">💉</div>
-<div class="floating">🩺</div><script>
-
-function searchMedicine(){
-
-let input=document.getElementById("search").value.toLowerCase();
-
-let rows=document.querySelectorAll("#table tr");
-
-rows.forEach(function(row){
-
-if(row.innerText.toLowerCase().includes(input))
-row.style.display="";
-else
-row.style.display="none";
-
-});
+document.getElementById(id).style.display="block"
 
 }
+
+/* ORDER SAVE */
+
+function saveOrder(e){
+
+e.preventDefault()
+
+let name=document.getElementById("name").value
+let med=document.getElementById("medicine").value
+let qty=document.getElementById("qty").value
+
+let orders=JSON.parse(localStorage.getItem("orders")||"[]")
+
+orders.push({name,med,qty})
+
+localStorage.setItem("orders",JSON.stringify(orders))
+
+alert("Order Submitted")
+
+}
+
+/* ADMIN LOGIN */
 
 function login(){
 
-let pass=document.getElementById("pass").value;
+let p=document.getElementById("pass").value
 
-if(pass==="vasu123"){
+if(p=="vasu123"){
 
-document.getElementById("panel").style.display="block";
+showPage("dashboard")
+loadOrders()
 
-}else{
+}
 
-alert("Wrong Password");
-
+else{
+alert("Wrong Password")
 }
 
 }
 
-function addMedicine(){
+/* LOAD ORDERS */
 
-let name=document.getElementById("name").value;
+function loadOrders(){
 
-let company=document.getElementById("company").value;
+let orders=JSON.parse(localStorage.getItem("orders")||"[]")
 
-let price=document.getElementById("price").value;
+let table=document.getElementById("ordersTable")
 
-let stock=document.getElementById("stock").value;
+table.innerHTML=""
 
-let li=document.createElement("li");
+orders.forEach(o=>{
 
-li.innerText=name+" - "+company+" - ₹"+price+" - Stock:"+stock;
+table.innerHTML+=`
+<tr>
+<td>${o.name}</td>
+<td>${o.med}</td>
+<td>${o.qty}</td>
+</tr>
+`
 
-document.getElementById("list").appendChild(li);
+})
 
 }
 
-</script></body>
+</script>
+
+</head>
+
+<body>
+
+<div id="loader">Loading Vasu Medical...</div>
+
+<div class="bg bg1"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<nav>
+
+<a onclick="showPage('home')">Home</a>
+<a onclick="showPage('about')">About</a>
+<a onclick="showPage('services')">Services</a>
+<a onclick="showPage('products')">Products</a>
+<a onclick="showPage('career')">Career</a>
+<a onclick="showPage('news')">News</a>
+<a onclick="showPage('order')">Order</a>
+<a onclick="showPage('contact')">Contact</a>
+<a onclick="showPage('admin')">Admin</a>
+
+</nav>
+
+<!-- HOME -->
+
+<section id="home" class="page">
+
+<h1>Vasu Medical Agency</h1>
+
+<p>Trusted pharmaceutical distribution company supplying medicines to pharmacies, clinics, and hospitals.</p>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about" class="page">
+
+<h1>Company History</h1>
+
+<p>
+Vasu Medical Agency was founded in 2014 with the goal of creating a reliable pharmaceutical distribution network.
+The company started as a small medicine supply business serving local pharmacies.
+</p>
+
+<p>
+Through dedication, strong partnerships with pharmaceutical companies, and reliable service,
+the company expanded its product range and distribution network.
+</p>
+
+<p>
+Today the company supplies medicines to healthcare providers while maintaining high standards of
+quality, storage, and distribution practices.
+</p>
+
+</section>
+
+<!-- SERVICES -->
+
+<section id="services" class="page">
+
+<h1>Services</h1>
+
+<div class="cards">
+
+<div class="card">Pharmaceutical Distribution</div>
+<div class="card">Bulk Medicine Orders</div>
+<div class="card">Inventory Management</div>
+<div class="card">Healthcare Supply Chain</div>
+
+</div>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section id="products" class="page">
+
+<h1>Products</h1>
+
+<div class="cards">
+
+<div class="card">Paracetamol</div>
+<div class="card">Ibuprofen</div>
+<div class="card">Amoxicillin</div>
+<div class="card">Azithromycin</div>
+<div class="card">Vitamin C</div>
+<div class="card">Cough Syrup</div>
+
+</div>
+
+</section>
+
+<!-- CAREER -->
+
+<section id="career" class="page">
+
+<h1>Careers</h1>
+
+<ul>
+<li>Medical Sales Representative</li>
+<li>Warehouse Manager</li>
+<li>Delivery Executive</li>
+</ul>
+
+</section>
+
+<!-- NEWS -->
+
+<section id="news" class="page">
+
+<h1>Company News</h1>
+
+<div class="card">New medicine stock added</div>
+<div class="card">Distribution network expanding</div>
+
+</section>
+
+<!-- ORDER -->
+
+<section id="order" class="page">
+
+<h1>Order Medicines</h1>
+
+<form onsubmit="saveOrder(event)">
+
+<input id="name" placeholder="Your Name"><br><br>
+<input id="medicine" placeholder="Medicine Name"><br><br>
+<input id="qty" placeholder="Quantity"><br><br>
+
+<button type="submit">Submit Order</button>
+
+</form>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="page">
+
+<h1>Contact</h1>
+
+<p>Vasu Medical Agency</p>
+<p>Chhindwara, Madhya Pradesh</p>
+<p>Phone: +91 9000000000</p>
+
+</section>
+
+<!-- ADMIN -->
+
+<section id="admin" class="page">
+
+<h1>Admin Login</h1>
+
+<input id="pass" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="page">
+
+<h1>Admin Dashboard</h1>
+
+<h3>Orders</h3>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Name</th>
+<th>Medicine</th>
+<th>Quantity</th>
+</tr>
+
+</thead>
+
+<tbody id="ordersTable">
+
+</tbody>
+
+</table>
+
+</section>
+
+<footer>
+
+<h2>Vasu Medical Agency</h2>
+
+<p>Reliable pharmaceutical distribution company serving pharmacies and hospitals.</p>
+
+<p>© 2026 Vasu Medical Agency</p>
+
+</footer>
+
+</body>
 </html>
